@@ -169,3 +169,23 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Other folers and files
+.vscode/
+.idea/
+*.suo
+*.user
+*.sln
+*.swp
+*.tmp
+*.bak
+*.cache
+*.log
+*.vspscc
+uploads/
+node_modules/
+jspm_packages/
+typings/
+test.py
+temp.py
+.env
