@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
-import { View, Button, Text, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
+import * as Network from 'expo-network';
 
 export default function App() {
+  const [status, setStatus] = useState('Ready');
   const [recording, setRecording] = useState(null);
-  const [status, setStatus] = useState('Ready to Record');
-  const [isRecording, setIsRecording] = useState(false);
+  const [localIp, setLocalIp] = useState('');
+
+  // Fetch the local IP address when the app is loaded
+  useEffect(() => {
+    const getLocalIp = async () => {
+      const { ipAddress } = await Network.getIpAddressAsync();
+      setLocalIp(ipAddress);
+    };
+    getLocalIp();
+  }, []);
 
   const startRecording = async () => {
     try {
@@ -16,7 +26,6 @@ export default function App() {
           Audio.RecordingOptionsPresets.HIGH_QUALITY
         );
         setRecording(recording);
-        setIsRecording(true);
         setStatus('Recording...');
       } else {
         setStatus('Permission denied');
@@ -31,9 +40,9 @@ export default function App() {
     try {
       if (recording) {
         await recording.stopAndUnloadAsync();
-        setIsRecording(false);
-        setStatus('Recording stopped');
         const uri = recording.getURI();
+        setRecording(null);
+        setStatus('Uploading audio...');
         sendAudioToBackend(uri);
       }
     } catch (error) {
@@ -42,60 +51,78 @@ export default function App() {
     }
   };
 
-  const sendAudioToBackend = async (uri) => {
-    try {
-      const audioFile = await FileSystem.readAsStringAsync(uri, {
-        encoding: FileSystem.EncodingType.Base64,
-      });
-      const response = await fetch('http://10.0.2.2:5000/api/audio', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          audio: audioFile,
-        }),
-      });
-      const responseData = await response.json();
-      if (response.ok) {
-        console.log('Audio file uploaded successfully');
-      } else {
-        console.error('Failed to upload audio file:', responseData);
-      }
-    } catch (error) {
-      console.error('Error uploading audio to backend', error);
-    }
-  };
-
   const toggleRecording = () => {
-    if (isRecording) {
+    if (recording) {
       stopRecording();
     } else {
       startRecording();
     }
   };
 
-  const playRecording = async () => {
+  const sendAudioToBackend = async (uri) => {
     try {
-      if (recording) {
-        const { sound } = await recording.createNewLoadedSoundAsync();
-        await sound.playAsync();
-        setStatus('Playing Recording');
+      const audioFile = await FileSystem.readAsStringAsync(uri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+
+      // Use local IP for the backend URL
+      const backendUrl = `http://${localIp}:5000/api/audio`;
+
+      const response = await fetch(backendUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ audio: audioFile }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const responseData = await response.json();
+      console.log('Response data:', responseData);
+
+      if (response.ok) {
+        setStatus('Downloading audio response...');
+        const blob = await response.blob();
+        const localUri = `${FileSystem.cacheDirectory}response.wav`;
+        const fileBase64 = await blob.text();
+        await FileSystem.writeAsStringAsync(localUri, fileBase64, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+        setStatus('Audio saved. Playing...');
+        playReceivedAudio(localUri);
       } else {
-        console.error('No recording available to play');
-        setStatus('No recording available to play');
+        console.error('Failed to process audio:', responseData);
+        setStatus('Error processing audio');
       }
     } catch (error) {
-      console.error('Error playing recording', error);
-      setStatus('Error playing recording');
+      console.error('Error uploading audio to backend', error);
+      setStatus('Error uploading audio');
+    }
+  };
+
+  const playReceivedAudio = async (uri) => {
+    try {
+      const { sound } = await Audio.Sound.createAsync({ uri });
+      await sound.playAsync();
+      setStatus('Playing received audio...');
+    } catch (error) {
+      console.error('Error playing received audio', error);
+      setStatus('Error playing received audio');
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text>{status}</Text>
-      <Button title={isRecording ? 'Stop Recording' : 'Start Recording'} onPress={toggleRecording} />
-      {recording && !isRecording && <Button title="Play Recording" onPress={playRecording} />}
+      <Text style={styles.statusText}>{status}</Text>
+      <TouchableOpacity style={styles.microphoneButton} onPress={toggleRecording}>
+        <Image
+          source={{ uri: 'https://cdn-icons-png.flaticon.com/512/786/786205.png' }}
+          style={styles.microphoneIcon}
+        />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -105,5 +132,23 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 20,
+  },
+  statusText: {
+    fontSize: 18,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  microphoneButton: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#f44336',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  microphoneIcon: {
+    width: 50,
+    height: 50,
   },
 });
