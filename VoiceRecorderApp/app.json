@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "NLP",
-    "slug": "NLP",
+    "name": "VoiceRecorderApp",
+    "slug": "VoiceRecorderApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

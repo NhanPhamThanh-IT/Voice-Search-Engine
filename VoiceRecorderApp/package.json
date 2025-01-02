@@ -1,5 +1,5 @@
 {
-  "name": "nlp",
+  "name": "voicerecorderapp",
   "license": "0BSD",
   "version": "1.0.0",
   "main": "index.js",
@@ -10,11 +10,10 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "^52.0.23",
+    "axios": "^1.7.9",
+    "expo": "~52.0.23",
     "expo-av": "~15.0.1",
-    "expo-file-system": "~18.0.6",
-    "expo-network": "~7.0.4",
-    "expo-speech": "~13.0.0",
+    "expo-document-picker": "~13.0.1",
     "expo-status-bar": "~2.0.0",
     "react": "18.3.1",
     "react-native": "0.76.5"
