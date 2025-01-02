@@ -6,7 +6,6 @@ from main import main
 
 app = Flask(__name__)
 
-# Enable CORS for cross-origin requests
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 UPLOAD_FOLDER = './uploads'
@@ -24,7 +23,8 @@ def upload_audio():
         filename = secure_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
-        audio_url = f"http://192.168.2.152:5000/uploads/{filename}"  # Địa chỉ IP của laptop
+        content = main(filepath)
+        audio_url = f"http://192.168.2.152:5000/uploads/{filename}"
         return jsonify({"audio_url": audio_url})
 
 @app.route('/uploads/<filename>', methods=['GET'])
@@ -33,7 +33,6 @@ def serve_file(filename):
     if not os.path.exists(filepath):
         return jsonify({"error": "File not found"}), 404
     try:
-        main(filepath)
         return send_file(filepath, mimetype='audio/mpeg')
     except Exception as e:
         return jsonify({"error": f"Failed to serve file: {str(e)}"}), 500

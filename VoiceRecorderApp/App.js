@@ -75,8 +75,11 @@ export default function App() {
       <TouchableOpacity
         style={[styles.microphoneButton, recording && styles.recording]}
         onPress={recording ? stopRecording : startRecording}
+        accessibilityLabel={recording ? 'Dừng ghi âm' : 'Bắt đầu ghi âm'}
+        accessibilityHint={recording ? 'Nhấn để dừng ghi âm' : 'Nhấn để bắt đầu ghi âm'}
+        accessibilityRole="button"
       >
-        <Text style={styles.buttonText}>{recording ? 'Stop' : 'Record'}</Text>
+        <Text style={styles.buttonText}>{recording ? 'Dừng' : 'Ghi âm'}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -85,28 +88,30 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#FAFAFA',
   },
   microphoneButton: {
-    width: 80,
-    height: 80,
-    backgroundColor: '#FF6347',
-    borderRadius: 40,
+    width: 100,
+    height: 100,
+    backgroundColor: '#4CAF50',
+    borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
   },
   recording: {
-    backgroundColor: '#DC143C',
+    backgroundColor: '#F44336',
   },
   buttonText: {
-    color: '#fff',
-    fontSize: 18,
+    color: '#FFFFFF',
+    fontSize: 22,
     fontWeight: 'bold',
   },
 });
+
