@@ -45,7 +45,7 @@ export default function App() {
 
     try {
       console.log('Uploading audio to backend...');
-      const response = await axios.post('http://10.0.2.2:5000/upload', formData, {
+      const response = await axios.post('http://192.168.2.152:5000/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       console.log('Audio uploaded, playing response...');
@@ -73,10 +73,10 @@ export default function App() {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={styles.button}
+        style={[styles.microphoneButton, recording && styles.recording]}
         onPress={recording ? stopRecording : startRecording}
       >
-        <Text style={styles.buttonText}>{recording ? 'Stop Recording' : 'Start Recording'}</Text>
+        <Text style={styles.buttonText}>{recording ? 'Stop' : 'Record'}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -87,17 +87,26 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#f5f5f5',
   },
-  button: {
-    backgroundColor: '#6200ee',
-    borderRadius: 50,
-    padding: 20,
+  microphoneButton: {
+    width: 80,
+    height: 80,
+    backgroundColor: '#FF6347',
+    borderRadius: 40,
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+  },
+  recording: {
+    backgroundColor: '#DC143C',
   },
   buttonText: {
     color: '#fff',
     fontSize: 18,
+    fontWeight: 'bold',
   },
 });
