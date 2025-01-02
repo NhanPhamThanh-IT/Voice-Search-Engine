@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, Text, ScrollView, Dimensions } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Text, ScrollView, Dimensions, Image } from 'react-native';
 import { Audio } from 'expo-av';
 import axios from 'axios';
 
@@ -71,11 +71,22 @@ export default function App() {
   return (
     <View style={styles.container}>
       {content && (
-        <ScrollView contentContainerStyle={[styles.contentContainer, { marginHorizontal: dynamicMargin, paddingHorizontal: dynamicPadding }]}>
-          <Text style={styles.contentText} accessibilityRole="text">
-            {content}
-          </Text>
-        </ScrollView>
+        <>
+          <Image
+            source={require('./assets/bot.png')}
+            style={[styles.image]}
+          />
+          <ScrollView
+            contentContainerStyle={[
+              styles.contentContainer,
+              { marginHorizontal: dynamicMargin, paddingHorizontal: dynamicPadding },
+            ]}
+          >
+            <Text style={styles.contentText} accessibilityRole="text">
+              {content}
+            </Text>
+          </ScrollView>
+        </>
       )}
       <View style={styles.footer}>
         <TouchableOpacity
@@ -95,13 +106,17 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: '#FAFAFA',
     paddingTop: 40,
   },
   footer: {
-    marginBottom: 20,
+    position: 'absolute',
+    bottom: 20,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   microphoneButton: {
     width: 100,
@@ -137,5 +152,12 @@ const styles = StyleSheet.create({
     color: '#333',
     lineHeight: 24,
     textAlign: 'justify',
+  },
+  image: {
+    alignSelf: 'flex-end',
+    marginRight: 10,
+    marginTop: 10,
+    width: 50,
+    height: 50,
   },
 });
