@@ -24,8 +24,9 @@ def upload_audio():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
         content = main(filepath)
+        print(content)
         audio_url = f"http://192.168.2.152:5000/uploads/{filename}"
-        return jsonify({"audio_url": audio_url})
+        return jsonify({"audio_url": audio_url, "content": content}), 200
 
 @app.route('/uploads/<filename>', methods=['GET'])
 def serve_file(filename):
