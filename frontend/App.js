@@ -42,7 +42,7 @@ export default function App() {
     });
 
     try {
-      const response = await axios.post('http://192.168.2.152:5000/upload', formData, {
+      const response = await axios.post('http://192.168.1.8:5000/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       const { content, audio_url } = response.data;

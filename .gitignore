@@ -189,3 +189,6 @@ typings/
 test.py
 temp.py
 .env
+yarn.lock
+.expo/
+.DS_Store

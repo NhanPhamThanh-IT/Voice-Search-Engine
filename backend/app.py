@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 from flask_cors import CORS
 import os
 from main import main
+from utils.helper import get_ipv4_address
 
 app = Flask(__name__)
 
@@ -24,8 +25,7 @@ def upload_audio():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
         content = main(filepath)
-        print(content)
-        audio_url = f"http://192.168.2.152:5000/uploads/{filename}"
+        audio_url = f"http://{get_ipv4_address()}:5000/uploads/{filename}"
         return jsonify({"audio_url": audio_url, "content": content}), 200
 
 @app.route('/uploads/<filename>', methods=['GET'])
