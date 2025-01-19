@@ -4,38 +4,14 @@ and speech recognition. It uses the `pydub` library for audio format conversion,
 synthesis, and `speech_recognition` for converting speech from audio to text.
 
 Functions:
-1. convert_to_wav(input_path, output_path):
-   - Converts an audio file to the WAV format.
-   - Uses `pydub.AudioSegment` to read an input audio file and export it as a WAV file.
-   - Arguments:
-     - `input_path`: The path to the input audio file.
-     - `output_path`: The path where the WAV file will be saved.
-   
-2. text_to_speech(text, output_path, lang='vi'):
-   - Converts the given text into speech and saves it as an audio file.
-   - Uses `gTTS` to generate speech from text and save it as an audio file.
-   - Arguments:
-     - `text`: The text to be converted to speech.
-     - `output_path`: The path where the generated speech audio will be saved.
-     - `lang`: The language code for the speech (default is 'vi' for Vietnamese).
-
-3. listen(audio_file_path, language="vi-VN"):
-   - Converts speech from an audio file to text.
-   - Uses `speech_recognition` to recognize speech from the provided audio file.
-   - Arguments:
-     - `audio_file_path`: The path to the audio file containing speech.
-     - `language`: The language code for speech recognition (default is "vi-VN" for Vietnamese).
-   - Returns:
-     - The recognized text if successful.
-     - Error messages for different exceptions:
-       - "Unable to recognize audio" if speech recognition fails.
-       - "API request error: <error_message>" if there is a problem with the recognition service.
-       - "Audio file not found. Please check the path." if the file cannot be found.
+    1. convert_to_wav(input_path, output_path)
+    2. text_to_speech(text, output_path, lang='vi')
+    3. listen(audio_file_path, language="vi-VN")
 
 Dependencies:
-- pydub: For audio file manipulation and conversion.
-- gTTS: For generating speech from text.
-- speech_recognition: For speech-to-text conversion.
+    - pydub: For audio file manipulation and conversion.
+    - gTTS: For generating speech from text.
+    - speech_recognition: For speech-to-text conversion.
 """
 
 # Importing necessary libraries

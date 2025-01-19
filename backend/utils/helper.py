@@ -1,15 +1,11 @@
 """
 This module provides a function to retrieve the IPv4 address of the local machine.
 
-Function:
-1. get_ipv4_address():
-   - Retrieves the IPv4 address of the local machine by resolving the hostname.
-   - Uses the `socket` library to get the machine's hostname and resolve it to its corresponding IP address.
-   - Returns:
-     - The IPv4 address of the machine as a string.
+Function
+    1. get_ipv4_address()
 
 Dependencies:
-- socket: For network-related functions, including retrieving the hostname and resolving it to an IP address.
+    - socket: For network-related functions, including retrieving the hostname and resolving it to an IP address.
 """
 
 # Import the required libraries

@@ -6,16 +6,16 @@ and retrieve the processed audio via a GET request. The app supports cross-origi
 and stores uploaded files locally. It also returns a URL to access the uploaded file once it's processed.
 
 Modules:
-- Flask: Used for creating the web application and handling HTTP requests and responses.
-- werkzeug.utils: Provides the secure_filename function to sanitize the filename before saving.
-- flask_cors: Used to enable Cross-Origin Resource Sharing (CORS) to allow access from different origins.
-- os: Used to interact with the file system for creating directories and file operations.
-- main: Imported from the `main` module, processes the uploaded audio file.
-- utils.helper: Imports the `get_ipv4_address` function to fetch the current IPv4 address of the server.
+    - Flask: Used for creating the web application and handling HTTP requests and responses.
+    - werkzeug.utils: Provides the secure_filename function to sanitize the filename before saving.
+    - flask_cors: Used to enable Cross-Origin Resource Sharing (CORS) to allow access from different origins.
+    - os: Used to interact with the file system for creating directories and file operations.
+    - main: Imported from the `main` module, processes the uploaded audio file.
+    - utils.helper: Imports the `get_ipv4_address` function to fetch the current IPv4 address of the server.
 
 Configuration:
-- The application stores uploaded audio files in a local folder, defined by the constant `UPLOAD_FOLDER`.
-- The `UPLOAD_FOLDER` is created if it doesn't already exist.
+    - The application stores uploaded audio files in a local folder, defined by the constant `UPLOAD_FOLDER`.
+    - The `UPLOAD_FOLDER` is created if it doesn't already exist.
 
 Routes:
 1. /upload (POST):
@@ -33,21 +33,21 @@ Routes:
    - If serving the file fails, returns a 500 error with an error message.
 
 Server Configuration:
-- The app runs on host '0.0.0.0' and listens on port 5000.
-- Debug mode is enabled for development purposes.
+    - The app runs on host '0.0.0.0' and listens on port 5000.
+    - Debug mode is enabled for development purposes.
 
 Dependencies:
-- Flask: For web framework.
-- werkzeug: For secure file handling.
-- flask_cors: For CORS support.
-- os: For file operations.
-- main: For processing audio content.
-- utils.helper: For obtaining the server's IP address.
+    - Flask: For web framework.
+    - werkzeug: For secure file handling.
+    - flask_cors: For CORS support.
+    - os: For file operations.
+    - main: For processing audio content.
+    - utils.helper: For obtaining the server's IP address.
 
 Example Workflow:
-1. The client sends a POST request with an audio file to the `/upload` route.
-2. The server processes the file, saves it locally, and returns a URL to the audio file.
-3. The client can then use the returned URL to retrieve the processed file using a GET request.
+    1. The client sends a POST request with an audio file to the `/upload` route.
+    2. The server processes the file, saves it locally, and returns a URL to the audio file.
+    3. The client can then use the returned URL to retrieve the processed file using a GET request.
 
 """
 

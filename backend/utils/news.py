@@ -6,48 +6,21 @@ It leverages external APIs, text vectorization, and cosine similarity to process
 
 Functions:
 
-1. search_by_query(query):
-   - Sends a search query to the Serper API (Google search engine).
-   - Arguments:
-     - `query`: A string containing the search query.
-   - Returns:
-     - A dictionary containing the response data from the API if successful.
-     - An empty dictionary if the response status is not 200 or an error occurs.
-
-2. extract_snippets(content, max_snippets=10):
-   - Extracts relevant answer snippets from the search response.
-   - It first checks for an answer or snippet in the `answerBox` field, then extracts additional snippets from the organic search results.
-   - Arguments:
-     - `content`: A dictionary containing the search results from the Serper API.
-     - `max_snippets`: The maximum number of snippets to return (default is 10).
-   - Returns:
-     - A list of answer snippets, which can either be the direct answer or extracted from the organic results.
-   
-3. find_best_answer(question, answers):
-   - Compares a given question to a list of answers and finds the most relevant answer based on cosine similarity.
-   - Arguments:
-     - `question`: A string representing the user's question.
-     - `answers`: A list of answer snippets to compare against the question.
-   - Returns:
-     - The best matching answer from the list of answers based on cosine similarity.
-
-4. get_news_content(query):
-   - Retrieves the best answer for a given search query by performing a search, extracting relevant snippets, and determining the best match.
-   - Arguments:
-     - `query`: A string representing the search query.
-   - Returns:
-     - The best matching answer snippet based on cosine similarity.
+    1. search_by_query(query)
+    2. extract_snippets(content, max_snippets=10)
+    3. find_best_answer(question, answers)
+    4. get_news_content(query)
 
 Dependencies:
-- json: For encoding and decoding JSON data.
-- requests: For making HTTP requests to the Serper API to retrieve search results.
-- sklearn.feature_extraction.text.TfidfVectorizer: For vectorizing the text data (used in calculating cosine similarity).
-- sklearn.metrics.pairwise.cosine_similarity: For calculating cosine similarity between vectors.
-- dotenv: For loading environment variables from a `.env` file.
-- os: For interacting with the operating system, specifically retrieving the API key from environment variables.
+    - json: For encoding and decoding JSON data.
+    - requests: For making HTTP requests to the Serper API to retrieve search results.
+    - sklearn.feature_extraction.text.TfidfVectorizer: For vectorizing the text data (used in calculating cosine similarity).
+    - sklearn.metrics.pairwise.cosine_similarity: For calculating cosine similarity between vectors.
+    - dotenv: For loading environment variables from a `.env` file.
+    - os: For interacting with the operating system, specifically retrieving the API key from environment variables.
 
 Environment Variables:
-- X-API-KEY: The API key used for authenticating requests to the Serper API. Should be defined in a `.env` file.
+    - X-API-KEY: The API key used for authenticating requests to the Serper API. Should be defined in a `.env` file.
 """
 
 # Import necessary libraries
