@@ -1,7 +1,7 @@
-# NLP-FINAL Frontend
+# Voice-Search-Engine Frontend
 
 ## Project Description
-This project is the frontend part of the NLP-FINAL application. It provides a user interface for interacting with the NLP models and visualizing the results. The frontend is built using modern web technologies and frameworks to ensure a responsive and user-friendly experience.
+This project is the frontend part of the Voice-Search-Engine application. It provides a user interface for interacting with the NLP models and visualizing the results. The frontend is built using modern web technologies and frameworks to ensure a responsive and user-friendly experience.
 
 ## Installation
 To install the project dependencies, run the following command:

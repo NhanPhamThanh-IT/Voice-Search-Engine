@@ -1,7 +1,7 @@
-# NLP-FINAL Backend
+# Voice-Search-Engine Backend
 
 ## Project Description
-This project is the backend part of the NLP-FINAL application. It provides APIs for uploading audio files, processing them, and returning the corresponding text content. The backend is built using Flask and integrates various utilities for audio processing and news content retrieval.
+This project is the backend part of the Voice-Search-Engine application. It provides APIs for uploading audio files, processing them, and returning the corresponding text content. The backend is built using Flask and integrates various utilities for audio processing and news content retrieval.
 
 ## Installation
 To install the project dependencies, run the following command:

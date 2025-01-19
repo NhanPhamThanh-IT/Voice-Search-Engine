@@ -1,7 +1,7 @@
-# NLP-FINAL
+# Voice-Search-Engine
 
 ## Project Description
-NLP-FINAL is a comprehensive application that processes audio files to extract and return corresponding text content. The project is divided into two main parts: the backend and the frontend. The backend is built using Flask and handles audio processing and news content retrieval, while the frontend provides a user interface for interacting with the application.
+Voice-Search-Engine is a comprehensive application that processes audio files to extract and return corresponding text content. The project is divided into two main parts: the backend and the frontend. The backend is built using Flask and handles audio processing and news content retrieval, while the frontend provides a user interface for interacting with the application.
 
 ## Backend
 
@@ -41,7 +41,7 @@ backend/
 ## Frontend
 
 ### Description
-The frontend provides a user interface for interacting with the NLP-FINAL application. It allows users to upload audio files and view the processed text content.
+The frontend provides a user interface for interacting with the Voice-Search-Engine application. It allows users to upload audio files and view the processed text content.
 
 ### Installation
 To install the frontend dependencies, navigate to the `frontend` directory and run:
@@ -72,3 +72,14 @@ frontend/
 └── README.md           # Project documentation
 ```
 
+## Contributing
+If you would like to contribute to this project, please follow these steps:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some feature'`).
+5. Push to the branch (`git push origin feature-branch`).
+6. Open a pull request.
+
+## License
+This project is licensed under the MIT License.
